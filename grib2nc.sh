@@ -1,4 +1,9 @@
 #!/bin/bash
+#Written by Doug Catharine
+#dougcatharine@gmail.com
+#Written 150716
+#grib2nc.sh will convert .grb2 files to netcdf in parallel.  must have NCL
+#installed.  Will automaticly optimize to the number of processors avalable
 
 #feed directory/to/data.here
 WORKDIR=/uufs/chpc.utah.edu/common/home/strong-group3/

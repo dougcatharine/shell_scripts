@@ -1,7 +1,13 @@
 #!/bin/bash
+#Written by Doug Catharine
+#dougcatharine@gmail.com
+#Written 150716
+#delete_loop_grib2nc.sh will systematicly go through and erase all .grb2.
+#This prevents erasing of files that may not have been converted.  May be put
+#into a master script to clean up periodicly as conversion occurs
 
 #feed directory/to/data.here
-WORKDIR=/uufs/chpc.utah.edu/common/home/strong-group3/
+WORKDIR=/uufs/chpc.utah.edu/common/home/strong-group3/simcity/for_daniel/grb2
 cd $WORKDIR
 
 
