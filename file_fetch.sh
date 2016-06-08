@@ -1,8 +1,9 @@
 #!/bin/bash
 
 
-#where to put files
+#where to put files temp location
 WORKDIR=/uufs/chpc.utah.edu/common/home/strong-group3/simcity/RUC/TAR
+#where to put files final location
 FINISHED=/uufs/chpc.utah.edu/common/home/strong-group3/simcity/RUC/TAR/finished
 #where list of files to get
 WORKsheet=/uufs/chpc.utah.edu/common/home/strong-group3/simcity/RUC/RUC_update.txt

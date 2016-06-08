@@ -42,10 +42,11 @@ clear
 printf "\n\n\t $YELLOW           "; date ; printf "$OFF"
 printf "\n $GREEN"
 printf "\t +------------------------------------------------+\n"
-printf "\t |                grib2nc.sh                      |\n"
+printf "\t |                  grib2nc.sh                    |\n"
 printf "\t |               rev June 7, 2016                 |\n"
 printf "\t |                                                |\n"
 printf "\t |               by: Doug Catharine               |\n"
+printf "\t |             dougcatharine@gmail.com            |\n"
 printf "\t |                                                |\n"
 printf "\t |  This script will convert grib files to netcdf |\n"
 printf "\t |  files in a pseudo parallel fashion.  There is |\n"
@@ -54,9 +55,9 @@ printf "\t |  made.                                         |\n"
 printf "\t +------------------------------------------------+$OFF\n\n"
 
 
-printf "\t Hello $USER!"
+printf "\t Hello $USER!\n"
 printf "\t This resource has $NPROC processors available to untar files.\n"
-
+printf "\t $RED NCL must be installed! $OFF\n"
 
 printf "\t This program will convert the files listed in \n"
 printf "\t $WORKDIR\n"
@@ -64,7 +65,7 @@ printf "\t Is this the correct directory? \n"
 printf "\t $YELLOW<y/n>$OFF"; read -n 1 KEYIN
 
 if [[ $KEYIN == "N"  ||  $KEYIN == "n" ]]; then
-  printf "\n\n\t OK, I quit and did not do anything.\n\n"
+  printf "\n\n\t OK, adjust the script so that the directory is correct.\n\n"
   exit 0
 fi
 
