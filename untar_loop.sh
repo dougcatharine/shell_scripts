@@ -105,7 +105,7 @@ else
     for f in *.tar; do
   	   tar -xvf $f  --directory=$TODIR && rm $f &
   	    nrwait $NPROC
-      done
-      wait
+    done
+    wait
   done
 fi
