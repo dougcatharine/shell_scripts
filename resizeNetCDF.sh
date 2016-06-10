@@ -14,10 +14,10 @@ NPROC=$(nproc)
 # lon = netcdf.getVar(ncid,lon_number,'double');
 # lat_number = netcdf.inqVarID(ncid,'gridlat_0');
 # lat = netcdf.getVar(ncid,lat_number,'double');
-# minimum_lat=38.5;
-# maximum_lat=42.5;
-# minimum_lon=-113.5;
-# maximum_lon=-110.;
+minimum_lat=38.5;
+maximum_lat=42.5;
+minimum_lon=-113.5;
+maximum_lon=-110.;
 # [index indey] = find((lat>=minimum_lat & lat <=maximum_lat)  & (lon>=minimum_lon & lon <=maximum_lon));
 # minx_grid = min(index)
 # maxx_grid = max(index)
@@ -28,6 +28,31 @@ minx=126
 maxx=151
 miny=162
 maxy=198
+
+
+
+#must run in interactive mode command "bash filename", or run outside of
+#interactive mode with "sbatch filename"
+
+#params = ['TMP_P0_L1_GLC0,',... = surface temp
+#'HPBL_P0_L1_GLC0,'... = pbl height
+#'POT_P0_L103_GLC0,'... = potential temp at hight 2[m]
+#'SPFH_P0_L103_GLC0,'... = specific humidity at hight 2[m]
+#'TMP_P0_L100_GLC0,'... = temp at 37 pressure levels
+#'RH_P0_L100_GLC0,'... = rh at 37 pressure levels
+#'UGRD_P0_L100_GLC0,'... = u at 37 pressure levels
+#'UGRD_P0_L103_GLC0,'... = u 10m wind
+#'VGRD_P0_L100_GLC0,'... = v at 37 pressure levels
+#'VGRD_P0_L103_GLC0,'... = v 10m wind
+#'PRES_P0_L1_GLC0,'...  = surface pressure
+#'HGT_P0_L100_GLC0,'... = geopotential height of 37 pressure levels
+#'HGT_P0_L1_GLC0,'... = geopotential height of ground
+#'lv_ISBL0,'... = pressure levels
+#'gridrot_0,'... = grid rotation
+#'gridlat_0,'... = grid lat
+#'gridlon_0']; % = grid lon
+
+params=HPBL_P0_L1_GLC0,TMP_P0_L1_GLC0,POT_P0_L103_GLC0,SPFH_P0_L103_GLC0,TMP_P0_L100_GLC0,RH_P0_L100_GLC0,UGRD_P0_L100_GLC0,UGRD_P0_L103_GLC0,VGRD_P0_L100_GLC0,VGRD_P0_L103_GLC0,PRES_P0_L1_GLC0,HGT_P0_L100_GLC0,HGT_P0_L1_GLC0,lv_ISBL0,gridrot_0,gridlat_0,gridlon_0
 
 
 ################################################################################
@@ -128,7 +153,7 @@ else   #Delete
   for ii in {1..3}
   do
 		cd $WORKDIR
-		for f in *.nc ; do
+		for f in ruc2_130_2010* ; do
 		#must have NCO to reduce netcdf
       echo $f && ncks -d xgrid_0,$minx,$maxx -d ygrid_0,$miny,$maxy "$f" "../resized/resize_$f"  && rm $f &
       nrwait $NPROC
