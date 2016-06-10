@@ -114,37 +114,20 @@ sleep 1
 printf "\t ################################################################# \n"
 sleep 1
 printf "\t All Done \n"
-#
-# ################################################################################
-# ###############                   cleanup                     ##################
-# ################################################################################
-#
-# printf "\t!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n"
-# sleep 1
-# printf "\t@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n"
-# sleep 1
-# printf "\t###################################################################\n"
-# sleep 1
-# printf "\t Cleanup will begin in 10 seconds.  Use ctrl-c to exit \n"
-# for i in {1..10}
-# do
-#   printf "."
-#   sleep 1
-# done
-#
-# cd $WORKDIR
-# #create ddir if doesnt exist
-# if [ ! -d "$FINISHED" ]; then
-#   mkdir $FINISHED
-# fi
-# mv ./*/*.tar $FINISHED
-#
-# #remove all directories but $FINISHED
-# for d in */ ; do
-#   echo "$d"
-#   if [ d!=$FINISHED ]; then
-#       rm -rf $d
-#   fi
-# done
-#
+
+################################################################################
+###############                   cleanup                     ##################
+################################################################################
+
+
+cd $WORKDIR
+#create ddir if doesnt exist
+if [ ! -d "$FINISHED" ]; then
+  mkdir $FINISHED
+fi
+mv ./*/*.tar $FINISHED
+
+rmdir HAS0107654*
+
+
 # # #must run in interactive mode for total efficiency

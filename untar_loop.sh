@@ -2,7 +2,7 @@
 
 #where to put files
 FROMDIR=/uufs/chpc.utah.edu/common/home/strong-group3/simcity/RUC/TAR
-TODIR=/uufs/chpc.utah.edu/common/home/strong-group3/simcity/RUC/TAR/finished
+TODIR=/uufs/chpc.utah.edu/common/home/strong-group3/simcity/RUC/grib
 
 #number of processors available for psudo parallel function
 NPROC=$(nproc)
@@ -54,7 +54,7 @@ printf "\t |  to abort before any change is made.           |\n"
 printf "\t +------------------------------------------------+$OFF\n\n"
 
 
-printf "\t Hello $USER!"
+printf "\t Hello $USER! \n"
 printf "\t This resource has $NPROC processors available to untar files.\n"
 printf "\t                                     \n"
 printf "\t This program will unpack all files to \n"
@@ -80,6 +80,13 @@ fi
 printf "\t Would you like to delete files after unpacking? \n"
 printf "\t $YELLOW<y/n>$OFF"; read -n 1 KEYINDELETE
 
+# #create ddir if doesnt exist
+if [ ! -d "$TODIR" ]; then
+  mkdir $TODIR
+fi
+
+cd $FROMDIR
+
 if [[ $KEYINDELETE == "N"  ||  $KEYINDELETE == "n" ]]; then
   printf "\t Starting program in 10 seconds.  Use ctrl-c to exit \n"
   for i in {1..10}
@@ -103,7 +110,7 @@ else
   for ii in {1..3}
   do
     for f in *.tar; do
-  	   tar -xvf $f  --directory=$TODIR && rm $f &
+  	   tar -xvf $f --directory=$TODIR --wildcards --no-anchored '*000.grb2' && rm $f &
   	    nrwait $NPROC
     done
     wait

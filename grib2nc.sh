@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #feed directory/to/data.here
-WORKDIR=/uufs/chpc.utah.edu/common/home/strong-group3/
+WORKDIR=/uufs/chpc.utah.edu/common/home/strong-group3/simcity/RUC/grib
 
 #number of processors available for psudo parallel function
 NPROC=$(nproc)
