@@ -64,14 +64,14 @@ clear
 printf "\n\n\t $YELLOW           "; date ; printf "$OFF"
 printf "\n $GREEN"
 printf "\t +------------------------------------------------+\n"
-printf "\t |               resizeNetCDF.sh                 |\n"
-printf "\t |               rev June 10, 2016                 |\n"
+printf "\t |                resizeNetCDF.sh                 |\n"
+printf "\t |               rev June 10, 2016                |\n"
 printf "\t |                                                |\n"
 printf "\t |               by: Doug Catharine               |\n"
 printf "\t |             dougcatharine@gmail.com            |\n"
 printf "\t |                                                |\n"
 printf "\t |  This script will remove excess netcdf         |\n"
-printf "\t |  domain in a pseudo parallel fashion.       |\n"
+printf "\t |  domain in a pseudo parallel fashion.          |\n"
 printf "\t |  There is the option to abort before any 			|\n"
 printf "\t |  change is made.                               |\n"
 printf "\t +------------------------------------------------+$OFF\n\n"
@@ -119,7 +119,7 @@ if [[ $KEYINDELETE == "N"  ||  $KEYINDELETE == "n" ]]; then
 	cd $WORKDIR
 	for f in *.nc ; do
 	#must have NCO to reduce netcdf
-      ncks -d xgrid_0,$minx,$maxx -d ygrid_0,$miny,$maxy "$f" "../resized/resize_$f"  &
+      echo $f && ncks -d xgrid_0,$minx,$maxx -d ygrid_0,$miny,$maxy "$f" "../resized/resize_$f"  &
 	    nrwait $NPROC
 	done
 	wait
@@ -130,7 +130,7 @@ else   #Delete
 		cd $WORKDIR
 		for f in *.nc ; do
 		#must have NCO to reduce netcdf
-      ncks -d xgrid_0,$minx,$maxx -d ygrid_0,$miny,$maxy "$f" "../resized/resize_$f"  && rm $f &
+      echo $f && ncks -d xgrid_0,$minx,$maxx -d ygrid_0,$miny,$maxy "$f" "../resized/resize_$f"  && rm $f &
       nrwait $NPROC
 		done
 		wait
