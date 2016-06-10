@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #feed directory/to/data.here
-WORKDIR=/uufs/chpc.utah.edu/common/home/strong-group3/RUC/grib
+WORKDIR=/uufs/chpc.utah.edu/common/home/strong-group3/simcity/RUC/grib
 
 #number of processors available for psudo parallel function
 NPROC=$(nproc)
@@ -101,10 +101,12 @@ if [[ $KEYIN == "N"  ||  $KEYIN == "n" ]]; then
   printf "\n\n\t OK, adjust the script so that the params are correct.\n\n"
   exit 0
 fi
-
 printf "\t Would you like to delete files after resizing? \n"
 printf "\t $YELLOW<y/n>$OFF"; read -n 1 KEYINDELETE
 
+
+
+#Warning time
 printf "\t Starting program in 10 seconds.  Use ctrl-c to exit \n"
 for i in {1..10}
 do
@@ -112,6 +114,7 @@ do
   sleep 1
 done
 
+#No Delete
 if [[ $KEYINDELETE == "N"  ||  $KEYINDELETE == "n" ]]; then
 	cd $WORKDIR
 	for f in *.nc ; do
@@ -120,20 +123,14 @@ if [[ $KEYINDELETE == "N"  ||  $KEYINDELETE == "n" ]]; then
 	    nrwait $NPROC
 	done
 	wait
-else
-  printf "\t Starting program in 10 seconds.  Use ctrl-c to exit \n"
-  for i in {1..10}
-  do
-    printf "."
-    sleep 1
-  done
+else   #Delete
 # repeat for failed extracts
   for ii in {1..3}
   do
 		cd $WORKDIR
 		for f in *.nc ; do
 		#must have NCO to reduce netcdf
-      ncks -d xgrid_0,$minx,$maxx -d ygrid_0,$miny,$maxy "$f" "./resize_$f"  && rm $f &
+      ncks -d xgrid_0,$minx,$maxx -d ygrid_0,$miny,$maxy "$f" "../resized/resize_$f"  && rm $f &
       nrwait $NPROC
 		done
 		wait
